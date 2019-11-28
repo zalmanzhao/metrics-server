@@ -148,6 +148,7 @@ func (src *summaryMetricsSource) decodeNodeStats(nodeStats *stats.NodeStats, tar
 		MetricsPoint: sources.MetricsPoint{
 			Timestamp: timestamp,
 		},
+		Network: nodeStats.Network,
 	}
 	var errs []error
 	if err := decodeCPU(&target.CpuUsage, nodeStats.CPU); err != nil {
@@ -165,6 +166,7 @@ func (src *summaryMetricsSource) decodePodStats(podStats *stats.PodStats, target
 		Name:       podStats.PodRef.Name,
 		Namespace:  podStats.PodRef.Namespace,
 		Containers: make([]sources.ContainerMetricsPoint, len(podStats.Containers)),
+		Network: podStats.Network,
 	}
 
 	var errs []error
