@@ -19,6 +19,7 @@ import (
 	"time"
 
 	"k8s.io/apimachinery/pkg/api/resource"
+	stats "k8s.io/kubernetes/pkg/kubelet/apis/stats/v1alpha1"
 )
 
 // MetricsBatch is a single batch of pod, container, and node metrics from some source.
@@ -31,6 +32,8 @@ type MetricsBatch struct {
 type NodeMetricsPoint struct {
 	Name string
 	MetricsPoint
+	
+	Network  *stats.NetworkStats
 }
 
 // PodMetricsPoint contains the metrics for some pod's containers.
@@ -39,6 +42,8 @@ type PodMetricsPoint struct {
 	Namespace string
 
 	Containers []ContainerMetricsPoint
+	
+	Network  *stats.NetworkStats
 }
 
 // ContainerMetricsPoint contains the metrics for some container at some point in time.
